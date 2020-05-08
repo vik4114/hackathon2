@@ -1,69 +1,65 @@
 import os
-import fileinput
-def dotate(data,f_donar,f_amount):
-    f_donar.append(input("enter the donar name :"))
-    f_amount.append(int(input("amount donated :")))
-    data.write(str(f_donar[len(f_amount)-1])+" : "+ str(f_amount[len(f_amount)-1])+"\n")
-    print("Unique ID is :",(len(f_amount)-1))
-    return(data,f_donar,f_amount)
-def retrive(data,f_donar,f_amount):
-    print("enter the Unque ID the retrive your transaction data:")
-    b=int(input())
-    if (b<len(f_amount)):
-        print("NAME:",f_donar[b])
-        print("AMOUNT:",f_amount[b])
-    else:
-        print("entered ID is does not exist")
-def adddata(data,f_donar,f_amount):
-    print("enter the Unque ID the edit the transaction data:")
-    b=int(input())
-    if (b<len(f_amount)):
-        print("Enter the amount to be added :")
-        c=int(input())
-        for line in fileinput.input(data):
-            line=line.replace(str(f_donar[len(f_amount)-1])+" : "+ str(f_amount[len(f_amount)-1]),str(f_donar[len(f_amount)-1]+c)+" : "+ str(f_amount[len(f_amount)-1]))
-        f_amount[b]=f_amount[b]+c
-    else:
-        print("entered ID is does not exist")
-def retriveall(data,f_donar,f_amount):
-    for i in data:
-        print(i)
-if( __name__ == "__main__"):
-    os.chdir("D:\\")
-    data=open("Data.txt",'a+')
-    print("If admin enter 1 and if user enter 2")
-    f_amount=[]
-    f_donar=[]
-    key=int(input())
-    if(key==1):
-        passcode=123456789
-        print("Enter the Passcode :")
-        p=int(input())
-        if(p==passcode):
-            print("For add a donation entry 1,retrive a data enter 2, adding the amount to data 3,retriving all data 4 ,EXIT 5")
-            while(1):
-                comand=int(input())
-                if(comand==1):
-                    dotate(data,f_donar,f_amount)
-                elif(comand==2):
-                    retrive(data,f_donar,f_amount)
-                elif(comand==3):
-                    adddata(data,f_donar,f_amount)
-                elif(comand==4):
-                    retriveall(data,f_donar,f_amount)
-                else:
-                    break
+def donate(name,hospital,bloodgrp,status,data):
+    name.append(input("enter your name please :"))
+    hospital.append(input("Enter your name of hospital :"))
+    bloodgrp.append(input("Enter your blood group :"))
+    data.write("\n ---------------- \n "+"name of patient :"+str(name[len(name)-1])+"\n Hospital Name :"+str(hospital[len(name)-1])+"\n Blood group :"+str(bloodgrp[len(name)-1])+"Status : Blood Donated")
+    status.append(0)
+def request(name,hospital,bloodgrp,status,data):
+    name.append(input("enter your name please :"))
+    hospital.append(input("Enter your name of hospital :"))
+    bloodgrp.append(input("Enter your blood group you want :"))
+    data.write("\n ---------------- \n "+"name of patient :"+"\n Hospital Name :"+str(hospital[len(name)-1])+"\n Blood group :"+str(bloodgrp[len(name)-1])+"Status : Blood requested")
+    status.append(1)
+def bloodinfo(name,hospital,bloodgrp,status):
+    for i in range(len(name)):
+        print("\n ---------------- \n "+"name of patient :"+str(name[i])+"\n Hospital Name :"+str(hospital[i])+"\n Blood group :"+str(bloodgrp[i]))
+        if(status[i]==0):
+            print("Status : Blood Donated")
         else:
-            print("------Invalid password-----")
-    elif(key==2):
-        print("For add a donation entry 1,retrive a data enter 2, adding the amount to data 3,retriving all data 4 ,EXIT 5")
-        while(1):
-            comand=int(input())
-            if(comand==1):
-                dotate(data,f_donar,f_amount)
-            elif(comand==2):
-                retrive(data,f_donar,f_amount)
-            elif(comand==3):
-                adddata(data,f_donar,f_amount)
-            else:
-                break
+            print("Status : Blood requested")
+# main program
+print("welcome to blood bank")
+os.chdir("C:\\Users\\91787\\OneDrive\\Desktop\\my programs\\python")
+data=open("BloodData.txt",'a+')
+name=[]
+hospital=[]
+bloodgrp=[]
+status=[]#In 0 is for donated and 1 is requested blood 
+print("1) for donatating blood to blood bank ,\n 2) for requesting blood from blood bank,\n 3) for all the data of blood Bankenteries \n 4) enteries of rare blood grp \n 5)Entries of in a perticular hospital \n 6)retiving a perticular data by name of patient \n 7) Exit")
+while(1):
+    n=int(input())
+    if(n==1):
+        donate(name,hospital,bloodgrp,status,data)
+    elif(n==2):
+        request(name,hospital,bloodgrp,status,data)
+    elif(n==3):
+        bloodinfo(name,hospital,bloodgrp,status)
+    elif(n==4):
+        for i in range(len(name)):
+            if(bloodgrp[i]=="O-"):
+                print("\n ---------------- \n "+"name of patient :"+str(name[i])+"\n Hospital Name :"+str(hospital[i])+"\n Blood group :"+str(bloodgrp[i]))
+                if(status[i]==0):
+                    print("Status : Blood Donated")
+                else:
+                    print("Status : Blood requested")
+    elif(n==5):
+        h=input("Enter the name of Hospital")
+        for i in range(len(name)):
+            if(hospital[i]==h):
+                print("\n ---------------- \n "+"name of patient :"+str(name[i])+"\n Hospital Name :"+str(hospital[i])+"\n Blood group :"+str(bloodgrp[i]))
+                if(status[i]==0):
+                    print("Status : Blood Donated")
+                else:
+                    print("Status : Blood requested")
+    elif(n==6):
+        p=input("Enter the name of patient")
+        for i in range(len(name)):
+            if(name[i]==h):
+                print("name of patient :"+str(name[i])+"\n Hospital Name :"+str(hospital[i])+"\n Blood group :"+str(bloodgrp[i]))
+                if(status[i]==0):
+                    print("Status : Blood Donated")
+                else:
+                    print("Status : Blood requested")
+    else:
+        break
