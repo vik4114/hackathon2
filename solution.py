@@ -1,5 +1,3 @@
-#CODE BY YASHARTH DUBEY
-#IIIT DHARWAD
 import tkinter
 import xlrd
 import xlwt
