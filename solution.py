@@ -29,7 +29,7 @@ def retriveall(data,f_donar,f_amount):
     for i in data:
         print(i)
 if( __name__ == "__main__"):
-    os.chdir("C:\\Users\\91787\\OneDrive\\Desktop\\my programs\\python")
+    os.chdir("D:\\")
     data=open("Data.txt",'a+')
     print("If admin enter 1 and if user enter 2")
     f_amount=[]
